@@ -59,7 +59,7 @@ namespace Library.BLogic.Layer
             LbEntity.Entry(AuthorDl2).CurrentValues.SetValues(AuthorDl);
             LbEntity.SaveChanges();
         }
-
+        
     }
 }
 

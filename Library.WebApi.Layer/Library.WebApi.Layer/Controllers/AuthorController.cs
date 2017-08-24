@@ -34,13 +34,12 @@ namespace Library.WebApi.Layer.Controllers
         [System.Web.Http.HttpPut]
         public void Put(int Id,[FromBody]AuthorModel _Author)
         {
-
             AuthorApiActions.UpdateAuthor(Id,_Author);
         }
-
         public void Delete(int id)
         {
             AuthorApiActions.RemoveAuthorById(id);
+       
         }
     }
 }

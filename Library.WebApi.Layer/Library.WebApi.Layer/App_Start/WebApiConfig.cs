@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web.Http;
 using System.Web.Cors;
 using System.Web.Http.Cors;
-
 namespace Library.WebApi.Layer
 {
     public static class WebApiConfig
