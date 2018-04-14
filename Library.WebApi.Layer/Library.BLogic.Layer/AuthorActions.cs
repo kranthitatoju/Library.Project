@@ -28,15 +28,25 @@ namespace Library.BLogic.Layer
             listAuthorBl = Mapper.Map<List<AuthorModel>>(listAuthor);
             return listAuthorBl; 
         }
+
         public AuthorModel GetAuthorByName(string _Name)
         {
-            var author = LbEntity.Authors.FirstOrDefault(auths => auths.Name == _Name);
-            Mapper.Initialize(mapAuth => { mapAuth.CreateMap<Author, AuthorModel>(); });
-            AuthorBl = Mapper.Map<AuthorModel>(author);
+            AuthorBl = null;
+            try
+            {
+                var author = LbEntity.Authors.FirstOrDefault(auths => auths.Name == _Name);
+                Mapper.Initialize(mapAuth => { mapAuth.CreateMap<Author, AuthorModel>(); });
+                AuthorBl = Mapper.Map<AuthorModel>(author);
+            }
+            catch (NullReferenceException ex)
+            {
+                var msg = ex.Message;
+                throw;
+            }
             return AuthorBl;
-
         }
-        public void AddAuthor(AuthorModel _Author)
+
+            public void AddAuthor(AuthorModel _Author)
         {
              Mapper.Initialize(map => { map.CreateMap<AuthorModel, Author>(); });
              AuthorDl = Mapper.Map<Author>(_Author);
@@ -44,10 +54,10 @@ namespace Library.BLogic.Layer
              LbEntity.SaveChanges();
         }
         public void RemoveAuthorById(int _Id)
-        {
+        { 
             AuthorDl = new Author();
             AuthorDl = LbEntity.Authors.FirstOrDefault(auths => auths.Id == _Id);
-            LbEntity.Authors.Remove(AuthorDl);
+            LbEntity.Authors.Remove(AuthorDl); 
             LbEntity.SaveChanges();
         }
         public void UpdateAuthor(int Id,AuthorModel _Author)
